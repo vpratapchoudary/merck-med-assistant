@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 from pypdf import PdfReader
@@ -38,7 +39,10 @@ def chunk_embed_pdf(
     chunks = text_splitter.split_text(text)
 
     # Load the embedding model
-    model = SentenceTransformer(embed_model)
+    model = SentenceTransformer(
+        model_name_or_path=embed_model,
+        token=os.getenv("HF_TOKEN")
+    )
 
     # Embed each chunk
     embeddings = model.encode(chunks)

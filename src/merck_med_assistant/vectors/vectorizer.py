@@ -13,7 +13,9 @@ def vectorize_store_pdf(
         chunk_overlap: int = 200,
         embed_model: str = "all-MiniLM-L6-v2",
         vec_dim: int = 384,
-        metric: str = "cosine"
+        metric: str = "cosine",
+        pinecone_cloud: str = "aws",
+        pinecone_region: str = "us-east-1"
     ) -> None:
     """
     Vectorize a PDF file and store the embeddings in a Pinecone index.
@@ -41,7 +43,10 @@ def vectorize_store_pdf(
             index_name, 
             dimension=vec_dim, 
             metric=metric, 
-            serverless=ServerlessSpec()
+            serverless=ServerlessSpec(
+                cloud=pinecone_cloud,
+                region=pinecone_region
+            )
         )
     
     index = pinecone.Index(index_name)

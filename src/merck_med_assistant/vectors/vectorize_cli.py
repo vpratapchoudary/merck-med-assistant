@@ -2,7 +2,7 @@ import click
 
 from pathlib import Path
 from merck_med_assistant.vectors.vectorizer import vectorize_store_pdf
-from merck_med_assistant.config import VECTORIZER_CFG
+from merck_med_assistant.config import VECTORIZER_CFG, PINECONE_CFG
 
 @click.command()
 @click.option('--input_file', type=click.Path(exists=True), required=True, help='Path to the input file to vectorize.')
@@ -20,5 +20,7 @@ def vectorize_pdf(input_file):
         chunk_overlap=VECTORIZER_CFG["chunk_overlap"],
         embed_model=VECTORIZER_CFG["embed_model"],
         vec_dim=VECTORIZER_CFG["vec_dim"],
-        metric=VECTORIZER_CFG["metric"]
+        metric=VECTORIZER_CFG["metric"],
+        pinecone_cloud=PINECONE_CFG["cloud"],
+        pinecone_region=PINECONE_CFG["region"]
     )
