@@ -4,7 +4,7 @@ from pathlib import Path
 from pinecone import Pinecone, ServerlessSpec
 
 from merck_med_assistant.vectors.preprocess import chunk_embed_pdf
-
+from merck_med_assistant.utils.logs import logger
 
 def vectorize_store_pdf(
         pdf_path: Path, 
@@ -24,6 +24,7 @@ def vectorize_store_pdf(
         pdf_path (Path): Path to the PDF file.
         index_name (str): Name of the Pinecone index to store the embeddings.
     """
+    logger.info(f"Vectorizing PDF: {pdf_path}")
     # Chunk and embed the PDF
     chunks_with_embeddings = chunk_embed_pdf(
         pdf_path=pdf_path,
@@ -39,6 +40,7 @@ def vectorize_store_pdf(
 
     # Create or connect to the index
     if index_name not in pinecone.list_indexes():
+        logger.info(f"Creating Pinecone index: {index_name}")
         pinecone.create_index(
             index_name, 
             dimension=vec_dim, 
@@ -52,6 +54,7 @@ def vectorize_store_pdf(
     index = pinecone.Index(index_name)
 
     # Upsert embeddings into the index
+    logger.info(f"Upserting {len(chunks_with_embeddings)} embeddings into Pinecone index: {index_name}")
     for i, item in enumerate(chunks_with_embeddings):
         index.upsert(
             vectors=(

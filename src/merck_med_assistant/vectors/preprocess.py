@@ -5,6 +5,7 @@ from pypdf import PdfReader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from sentence_transformers import SentenceTransformer
 
+from merck_med_assistant.utils.logs import logger
 
 def chunk_embed_pdf(
         pdf_path: Path, 
@@ -25,12 +26,14 @@ def chunk_embed_pdf(
         List[dict]: A list of dictionaries containing the text chunks and their embeddings.
     """
     # Load the PDF
+    logger.info(f"Loading PDF from {pdf_path}")
     reader = PdfReader(pdf_path)
     text = ""
     for page in reader.pages:
         text += page.extract_text() + "\n"
 
     # Split the text into chunks
+    logger.info(f"Splitting text into chunks of size {chunk_size} with overlap {chunk_overlap}")
     text_splitter = RecursiveCharacterTextSplitter(
         chunk_size=chunk_size,
         chunk_overlap=chunk_overlap,
@@ -39,12 +42,14 @@ def chunk_embed_pdf(
     chunks = text_splitter.split_text(text)
 
     # Load the embedding model
+    logger.info(f"Loading embedding model: {embed_model}")
     model = SentenceTransformer(
         model_name_or_path=embed_model,
         token=os.getenv("HF_TOKEN")
     )
 
     # Embed each chunk
+    logger.info(f"Embedding chunks with model: {embed_model}")
     embeddings = model.encode(chunks)
 
     # Create a list of dictionaries with text and embeddings
