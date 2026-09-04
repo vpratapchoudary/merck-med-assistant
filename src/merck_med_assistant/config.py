@@ -6,3 +6,8 @@ VECTORIZER_CFG = {
     "metric": "cosine",
     "index_name": "merck_manual_index"
 }
+
+PINECONE_CFG = {
+    "cloud": "aws",
+    "region": "us-east-1"
+}

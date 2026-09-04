@@ -2,7 +2,8 @@ import click
 
 from pathlib import Path
 from merck_med_assistant.vectors.vectorizer import vectorize_store_pdf
-from merck_med_assistant.config import VECTORIZER_CFG
+from merck_med_assistant.config import VECTORIZER_CFG, PINECONE_CFG
+from merck_med_assistant.utils.logs import logger
 
 @click.command()
 @click.option('--input_file', type=click.Path(exists=True), required=True, help='Path to the input file to vectorize.')
@@ -11,6 +12,7 @@ def vectorize_pdf(input_file):
     Command-line interface to vectorize a PDF file and store the embeddings in a Pinecone index.
     """
 
+    logger.info(f"Starting vectorization for file: {input_file}")
     pdf_path = Path(input_file)
     
     vectorize_store_pdf(
@@ -20,5 +22,7 @@ def vectorize_pdf(input_file):
         chunk_overlap=VECTORIZER_CFG["chunk_overlap"],
         embed_model=VECTORIZER_CFG["embed_model"],
         vec_dim=VECTORIZER_CFG["vec_dim"],
-        metric=VECTORIZER_CFG["metric"]
+        metric=VECTORIZER_CFG["metric"],
+        pinecone_cloud=PINECONE_CFG["cloud"],
+        pinecone_region=PINECONE_CFG["region"]
     )
