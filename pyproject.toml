@@ -7,11 +7,24 @@ authors = [
     { name = "Pratap V", email = "vpratapchoudary@gmail.com" }
 ]
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "click>=8.5.0",
+    "langchain-text-splitters>=1.1.2",
+    "pinecone>=9.1.0",
+    "pypdf>=6.16.2",
+    "sentence-transformers>=6.0.1",
+]
 
 [project.scripts]
-merck-med-assistant = "merck_med_assistant:main"
+vectorize-pdf = "merck_med_assistant.vectors.vectorize_cli:vectorize_pdf"
 
 [build-system]
 requires = ["uv_build>=0.12.8,<0.13.0"]
 build-backend = "uv_build"
+
+[tool.setuptools]
+# Use a src layout so packages are discovered under the `src/` directory.
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
