@@ -1,7 +1,8 @@
 import os
 from pathlib import Path
 
-from pinecone import Pinecone, ServerlessSpec
+from pinecone.grpc import PineconeGRPC as Pinecone
+from pinecone import ServerlessSpec
 
 from merck_med_assistant.vectors.preprocess import chunk_embed_pdf
 from merck_med_assistant.utils.logs import logger
@@ -34,24 +35,25 @@ def vectorize_store_pdf(
     )
 
     # Initialize Pinecone client
-    pinecone = Pinecone(
+    pc = Pinecone(
         api_key=os.getenv("PINECONE_API_KEY")
     )
 
-    # Create or connect to the index
-    if index_name not in pinecone.list_indexes():
+    if not pc.has_index(index_name):
         logger.info(f"Creating Pinecone index: {index_name}")
-        pinecone.create_index(
-            index_name, 
-            dimension=vec_dim, 
-            metric=metric, 
-            serverless=ServerlessSpec(
+        pc.indexes.create(
+            name=index_name,
+            vector_type="dense",
+            dimension=vec_dim,
+            metric=metric,
+            spec=ServerlessSpec(
                 cloud=pinecone_cloud,
                 region=pinecone_region
-            )
+            ),
+            deletion_protection="disabled"
         )
     
-    index = pinecone.Index(index_name)
+    index = pc.Index(index_name)
 
     # Upsert embeddings into the index
     logger.info(f"Upserting {len(chunks_with_embeddings)} embeddings into Pinecone index: {index_name}")
