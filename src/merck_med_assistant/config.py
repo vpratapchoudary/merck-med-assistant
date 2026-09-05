@@ -4,10 +4,12 @@ VECTORIZER_CFG = {
     "chunk_overlap": 200,
     "vec_dim": 384,
     "metric": "cosine",
-    "index_name": "merck_manual_index"
 }
 
 PINECONE_CFG = {
     "cloud": "aws",
-    "region": "us-east-1"
+    "region": "us-east-1",
+    "index_name": "med-assistant-index",
+    "namespace": "merck-manual",
+    "index_host": "https://med-assistant-index-dtdp5ws.svc.aped-4627-b74a.pinecone.io"
 }

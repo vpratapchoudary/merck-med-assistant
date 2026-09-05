@@ -32,4 +32,4 @@ jobs:
 
       - name: Run vectorizer script
         run: |
-          uv run vectorize-pdf --input_file ${input_file_path}
+          uv run vectorize-pdf --input-file ${input_file_path}
