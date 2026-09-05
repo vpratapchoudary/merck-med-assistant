@@ -3,8 +3,8 @@ from pathlib import Path
 from pypdf import PdfReader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
-from merck_med_assistant.vectors.embedding import load_embedding_model
-from merck_med_assistant.utils.logs import logger
+from backend.vectors.embedding import load_embedding_model
+from backend.utils.logs import logger
 
 def chunk_embed_pdf(
         pdf_path: Path, 

@@ -2,7 +2,7 @@ import os
 
 from pinecone.grpc import PineconeGRPC as Pinecone
 
-from merck_med_assistant.utils.logs import logger
+from backend.utils.logs import logger
 
 def query_pinecone_index(
         index_host: str, 

@@ -1,9 +1,9 @@
 import click
 
 from pathlib import Path
-from merck_med_assistant.vectors.vectorizer import vectorize_store_pdf
-from merck_med_assistant.config import VECTORIZER_CFG, PINECONE_CFG
-from merck_med_assistant.utils.logs import logger
+from backend.vectors.vectorizer import vectorize_store_pdf
+from backend.config import VECTORIZER_CFG, PINECONE_CFG
+from backend.utils.logs import logger
 
 @click.command()
 @click.option('--input-file', type=click.Path(exists=True), required=True, help='Path to the input file to vectorize.')
