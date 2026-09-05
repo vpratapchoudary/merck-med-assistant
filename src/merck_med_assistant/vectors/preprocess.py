@@ -1,10 +1,9 @@
-import os
 from pathlib import Path
 
 from pypdf import PdfReader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from sentence_transformers import SentenceTransformer
 
+from merck_med_assistant.vectors.embedding import load_embedding_model
 from merck_med_assistant.utils.logs import logger
 
 def chunk_embed_pdf(
@@ -41,12 +40,7 @@ def chunk_embed_pdf(
     )
     chunks = text_splitter.split_text(text)
 
-    # Load the embedding model
-    logger.info(f"Loading embedding model: {embed_model}")
-    model = SentenceTransformer(
-        model_name_or_path=embed_model,
-        token=os.getenv("HF_TOKEN")
-    )
+    model = load_embedding_model(embed_model)
 
     # Embed each chunk
     logger.info(f"Embedding chunks with model: {embed_model}")
