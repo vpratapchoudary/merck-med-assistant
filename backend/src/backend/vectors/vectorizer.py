@@ -5,8 +5,8 @@ from pathlib import Path
 from pinecone.grpc import PineconeGRPC as Pinecone
 from pinecone import ServerlessSpec
 
-from merck_med_assistant.vectors.preprocess import chunk_embed_pdf
-from merck_med_assistant.utils.logs import logger
+from backend.vectors.preprocess import chunk_embed_pdf
+from backend.utils.logs import logger
 
 def vectorize_store_pdf(
         pdf_path: Path, 

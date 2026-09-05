@@ -4,8 +4,8 @@ import os
 
 from sentence_transformers import SentenceTransformer
 
-from merck_med_assistant.config import VECTORIZER_CFG
-from merck_med_assistant.utils.logs import logger
+from backend.config import VECTORIZER_CFG
+from backend.utils.logs import logger
 
 
 @lru_cache(maxsize=None)

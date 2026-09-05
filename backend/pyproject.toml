@@ -1,5 +1,5 @@
 [project]
-name = "merck-med-assistant"
+name = "backend"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
@@ -16,7 +16,8 @@ dependencies = [
 ]
 
 [project.scripts]
-vectorize-pdf = "merck_med_assistant.vectors.vectorize_cli:vectorize_pdf"
+backend = "backend:app"
+vectorize-pdf = "backend.vectors.vectorize_cli:vectorize_pdf"
 
 [build-system]
 requires = ["uv_build>=0.12.8,<0.13.0"]

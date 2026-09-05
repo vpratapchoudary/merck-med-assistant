@@ -1,6 +1,6 @@
-from merck_med_assistant.config import PINECONE_CFG
-from merck_med_assistant.vectors.embedding import embed_query, load_embedding_model
-from merck_med_assistant.vectors.retriever import query_pinecone_index
+from backend.config import PINECONE_CFG
+from backend.vectors.embedding import embed_query, load_embedding_model
+from backend.vectors.retriever import query_pinecone_index
 
 
 class MedicalAssistant:
@@ -19,3 +19,10 @@ class MedicalAssistant:
 			top_k=top_k,
 			namespace=PINECONE_CFG["namespace"],
 		)
+
+if __name__ == "__main__":
+	# Example usage
+	assistant = MedicalAssistant(index_host=PINECONE_CFG["index_host"])
+	user_query = "What are the symptoms of diabetes?"
+	results = assistant.query(user_query)
+	print(results)
