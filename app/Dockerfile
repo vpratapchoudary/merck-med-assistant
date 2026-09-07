@@ -7,7 +7,7 @@ WORKDIR /app
 # Disable development dependencies
 ENV UV_NO_DEV=1
 
-# Install dependencies
+# Copy files and Install dependencies
 RUN pip3 install uv
 COPY pyproject.toml uv.lock ./
 COPY src ./src
