@@ -9,7 +9,7 @@ ENV UV_NO_DEV=1
 
 # Install dependencies
 RUN pip3 install uv
-COPY pyproject.toml uv.lock README.md ./
+COPY pyproject.toml uv.lock ./
 COPY src ./src
 RUN uv sync --locked
 
