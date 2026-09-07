@@ -20,7 +20,4 @@ USER user
 ENV HOME=/home/user \
 	PATH=/app/.venv/bin:$PATH
 
-# Expose the default port Render expects for web services (10000)
-EXPOSE 10000
-
-CMD ["uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "10000"]
+CMD ["sh", "-c", "uvicorn backend.main:app --host 0.0.0.0 --port $PORT"]
