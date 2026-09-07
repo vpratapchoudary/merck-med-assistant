@@ -4,7 +4,9 @@ from pypdf import PdfReader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 from backend.vectors.embedding import load_embedding_model
-from backend.utils.logs import logger
+from backend.utils.logs import log_config
+
+logger = log_config(__name__)
 
 def chunk_embed_pdf(
         pdf_path: Path, 

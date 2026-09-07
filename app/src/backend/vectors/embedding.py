@@ -5,7 +5,9 @@ import os
 from sentence_transformers import SentenceTransformer
 
 from backend.config import VECTORIZER_CFG
-from backend.utils.logs import logger
+from backend.utils.logs import log_config
+
+logger = log_config(__name__)
 
 
 @lru_cache(maxsize=None)

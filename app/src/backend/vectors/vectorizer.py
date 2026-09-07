@@ -6,7 +6,9 @@ from pinecone.grpc import PineconeGRPC as Pinecone
 from pinecone import ServerlessSpec
 
 from backend.vectors.preprocess import chunk_embed_pdf
-from backend.utils.logs import logger
+from backend.utils.logs import log_config
+
+logger = log_config(__name__)
 
 def vectorize_store_pdf(
         pdf_path: Path, 

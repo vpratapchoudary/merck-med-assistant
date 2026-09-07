@@ -13,3 +13,9 @@ PINECONE_CFG = {
     "namespace": "merck-manual",
     "index_host": "https://med-assistant-index-dtdp5ws.svc.aped-4627-b74a.pinecone.io"
 }
+
+LLM_CFG = {
+    "model_name": "qwen/qwen3.8-27b",
+    "temperature": 0.0,
+    "max_tokens": 512
+}

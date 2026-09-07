@@ -2,7 +2,9 @@ import os
 
 from pinecone.grpc import PineconeGRPC as Pinecone
 
-from backend.utils.logs import logger
+from backend.utils.logs import log_config
+
+logger = log_config(__name__)
 
 def query_pinecone_index(
         index_host: str, 
