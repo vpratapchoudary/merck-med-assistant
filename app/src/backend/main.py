@@ -1,6 +1,7 @@
-from pathlib import Path
+import os
 from contextlib import asynccontextmanager
 
+import uvicorn
 from fastapi import FastAPI
 from chainlit.utils import mount_chainlit
 
@@ -27,3 +28,8 @@ mount_chainlit(
 	target=str(CL_PATH),
 	path="/ui",
 )
+
+
+if __name__ == "__main__":
+    port = int(os.getenv("PORT", 10000))
+    uvicorn.run(app, host="0.0.0.0", port=port)

@@ -20,4 +20,4 @@ USER user
 ENV HOME=/home/user \
 	PATH=/app/.venv/bin:$PATH
 
-CMD ["sh", "-c", "uvicorn backend.main:app --host 0.0.0.0 --port $PORT"]
+CMD ["uv", "run", "/app/src/backend/main.py"]
