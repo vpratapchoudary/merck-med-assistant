@@ -219,3 +219,6 @@ __marimo__/
 
 # Chainlit
 .chainlit/
+
+# Mac
+.DS_Store
