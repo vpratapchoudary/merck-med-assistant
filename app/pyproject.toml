@@ -1,5 +1,5 @@
 [project]
-name = "backend"
+name = "merck-med-assistant"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
@@ -21,12 +21,15 @@ dependencies = [
 ]
 
 [project.scripts]
-backend = "backend:app"
 vectorize-pdf = "backend.vectors.vectorize_cli:vectorize_pdf"
 
 [build-system]
 requires = ["uv_build>=0.12.8,<0.13.0"]
 build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "backend"
+module-root = "src"
 
 [tool.setuptools]
 # Use a src layout so packages are discovered under the `src/` directory.
