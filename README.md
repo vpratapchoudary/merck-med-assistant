@@ -155,7 +155,7 @@ docker build -t merck-med-assistant ./app
 Run:
 
 ```bash
-docker run -p 8000:8000 -e PINECONE_API_KEY="..." -e HF_TOKEN="..." -e GROQ_API_KEY="..." merck-med-assistant
+docker run -p 10000:10000 -e PINECONE_API_KEY="..." -e HF_TOKEN="..." -e GROQ_API_KEY="..." merck-med-assistant
 ```
 
 ## Notes
